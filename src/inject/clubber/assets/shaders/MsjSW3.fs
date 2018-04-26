@@ -1,4 +1,4 @@
-//Ether by nimitz (twitter: @stormoid)
+//Ether by nimitz (twitter: @stormoid) (with some minor modifications)
 
 #define t iGlobalTime
 mat2 m(float a){float c=cos(a), s=sin(a);return mat2(c,-s,s,c);}
@@ -15,9 +15,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ){
     for(int i=0; i<=5; i++)	{
 		vec3 p = vec3(0,0,5.) + normalize(vec3(p, -1.))*d;
         float rz = map(p);
-		float f =  clamp((rz - map(p+.1))*length(iMusic[1].xz), -.1, 1. );
+		float f =  clamp((rz - map(p+.1))*(length(iMusic[1].xz) * length(iMusic[0].xyz) * 1.5), -.1, 1. );
         vec3 l = vec3(0.1,0.3,.4) + (vec3(5., 2.5, 3.) - length(iMusic[0].xyz))*f;
-        cl = cl*l + (1.-smoothstep(iMusic[0].w, 3. - iMusic[3].z, rz))*.7*l;
+        cl = cl*l + (1.-smoothstep((length(iMusic[0].xz) * 1.5), 3. - iMusic[0].z, rz))*.7*l;
 		d += min(rz, 1.);
 	}
     fragColor = vec4(cl, 1.);

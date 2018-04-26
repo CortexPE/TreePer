@@ -66,7 +66,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	float rz = flow(p);
 	p /= exp(mod(time*3.,2.1));
 	rz *= (6.-spiral(p,3.))*.9;
-	vec3 col = vec3(.2,0.07,0.01)/rz;
+	vec3 col = vec3(length(iMusic[0].xz),length(iMusic[1].xz),length(iMusic[2].xz))/(rz * 4.);
 	col=pow(abs(col),vec3(1.01));
 	fragColor = vec4(col,1.0);
 }
